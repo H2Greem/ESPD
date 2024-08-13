@@ -1253,9 +1253,10 @@ function render_request(obj, part = espd_request, EG_FLAG = true) {
             const element = obj[elm]
             switch (element.type) {
                 case "CRITERION":
+                    let c_id = (element.requestpath.indexOf('OT') != -1)?element.requestpath:element.elementUUID
                     tmp = part.com(` Criterion: ${element.name} `)
                         .ele('@cac', 'TenderingCriterion')
-                        .ele('@cbc', 'ID', { 'schemeID': 'Criterion', 'schemeAgencyID': 'OP', 'schemeVersionID': schemeVersionID }).txt(element.requestpath).up()
+                        .ele('@cbc', 'ID', { 'schemeID': 'Criterion', 'schemeAgencyID': 'OP', 'schemeVersionID': schemeVersionID }).txt(c_id).up()
                         .ele('@cbc', 'CriterionTypeCode', { 'listID': "http://publications.europa.eu/resource/authority/criterion", 'listAgencyID': "OP", 'listVersionID': "20230315-0" }).txt(element.elementcode).up()
                         .ele('@cbc', 'Name').txt(element.name).up()
                         .ele('@cbc', 'Description').txt(element.description).up()
